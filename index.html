@@ -3,242 +3,340 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NexGen CyberDefence</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <title>NexGen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
+    :root {
+      --color-bg: #0a0a0a;
+      --color-card: #111;
+      --color-accent: #58a6ff;
+      --color-text: #e0e0e0;
+    }
+
+    body.light {
+      --color-bg: #f7f7f7;
+      --color-card: #fff;
+      --color-accent: #007bff;
+      --color-text: #222;
+    }
+
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(180deg, #0d1117, #161b22);
-      color: #e6edf3;
+      font-family: 'Orbitron', sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
       line-height: 1.6;
-      scroll-behavior: smooth;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     header {
-      background: rgba(22, 27, 34, 0.9);
-      backdrop-filter: blur(10px);
-      padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      padding: 20px 40px;
+      background-color: #111;
+      border-bottom: 2px solid var(--color-accent);
     }
 
-    .logo h1 {
-      font-size: 2em;
-      color: #58a6ff;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 25px;
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--color-accent);
     }
 
     .nav-links a {
-      color: #e6edf3;
+      color: var(--color-text);
       text-decoration: none;
-      font-weight: 600;
+      margin-left: 20px;
+      font-weight: 500;
+      position: relative;
       transition: color 0.3s;
     }
 
     .nav-links a:hover {
-      color: #58a6ff;
+      color: var(--color-accent);
+      text-shadow: 0 0 6px var(--color-accent), 0 0 12px var(--color-accent);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      margin-left: 20px;
     }
 
     .hero {
+      position: relative;
+      overflow: hidden;
       text-align: center;
-      padding: 120px 20px 80px;
-      background: linear-gradient(120deg, #0d1117, #1f2937);
-      animation: fadeIn 1s ease-in;
+      padding: 100px 20px;
+      background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    #stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero h2,
+    .hero p,
+    .hero a {
+      position: relative;
+      z-index: 1;
+      transition: transform 0.2s;
     }
 
     .hero h2 {
-      font-size: 3em;
-      font-weight: 800;
+      font-size: 48px;
       margin-bottom: 20px;
+      color: var(--color-accent);
     }
 
     .hero p {
-      font-size: 1.2em;
-      color: #8b949e;
+      font-size: 20px;
       margin-bottom: 30px;
     }
 
     .button {
-      background: linear-gradient(90deg, #238636, #2ea043);
-      color: #fff;
-      padding: 14px 30px;
+      background: var(--color-accent);
+      color: #000;
+      padding: 12px 30px;
       border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 1em;
-      transition: 0.3s;
-      cursor: pointer;
+      border-radius: 30px;
       text-decoration: none;
-      display: inline-block;
+      font-weight: bold;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .button:hover {
-      background: linear-gradient(90deg, #2ea043, #238636);
+      background: #0051cc;
+      box-shadow: 0 0 10px var(--color-accent), 0 0 20px var(--color-accent);
+      transform: scale(1.05);
     }
 
-    section {
-      padding: 80px 20px;
+    main {
+      padding: 60px 20px;
       max-width: 1200px;
-      margin: auto;
+      margin: 0 auto;
     }
 
-    .services, .steps, .contact, .clients {
+    .services {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 30px;
-      animation: fadeInUp 0.7s ease;
     }
 
     .card {
-      background: #21262d;
-      padding: 30px;
-      border-radius: 10px;
-      border: 1px solid #30363d;
-      transition: 0.3s;
-      text-align: center;
+      background-color: var(--color-card);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid transparent;
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 20px rgba(88,166,255,0.3);
+      transform: translateY(-5px);
+      border-color: var(--color-accent);
+      box-shadow: 0 0 15px var(--color-accent);
     }
 
     .card h3 {
-      color: #58a6ff;
       margin-bottom: 10px;
-    }
-
-    .card p {
-      color: #8b949e;
+      font-size: 20px;
+      color: var(--color-accent);
     }
 
     footer {
-      background: #0d1117;
       text-align: center;
-      padding: 30px;
-      color: #6e7681;
-      border-top: 1px solid #30363d;
-      font-size: 0.9em;
+      padding: 30px 20px;
+      background-color: #111;
+      border-top: 2px solid var(--color-accent);
+      margin-top: 40px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    footer p {
+      color: #999;
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+#typewriter {
+  display: inline-block;
+  font-size: 48px;
+  color: var(--color-accent);
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-    @media (max-width: 768px) {
-      .nav-links {
-        flex-direction: column;
-        align-items: center;
-      }
-      .hero h2 {
-        font-size: 2em;
-      }
-    }
+#cursor {
+  display: inline-block;
+  animation: blink 0.8s infinite;
+  color: var(--color-accent);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
+
   </style>
 </head>
 <body>
-
   <header>
-    <div class="logo"><h1>NexGen</h1></div>
+    <div class="logo">NexGen</div>
     <nav class="nav-links">
-      <a href="about.html">О нас</a>
-      <a href="services.html">Услуги</a>
-      <a href="account.html">Кабинет</a>
-      <a href="contact.html">Контакты</a>
+      <a href="#">Главная</a>
+      <a href="#">Услуги</a>
+      <a href="#">Контакты</a>
+      <span class="theme-toggle" id="themeToggle" title="Сменить тему">
+        <i data-lucide="moon-star"></i>
+      </span>
     </nav>
   </header>
 
-  <section class="hero">
-    <h2>Будущее кибербезопасности уже здесь</h2>
+  <section class="hero" id="hero">
+    <canvas id="stars"></canvas>
+    <h2 id="typewriter"><span id="typed-text"></span><span id="cursor">|</span></h2>
     <p>Пентесты, DDoS-защита, реагирование на инциденты и защита данных.</p>
-    <a href="#services" class="button">Узнать больше</a>
+    <a href="#" class="button"><i data-lucide="shield-check"></i>Узнать больше</a>
   </section>
 
-  <section id="services" class="services">
-    <div class="card">
-      <h3>Аудит ИБ</h3>
-      <p>Оценка защиты, выявление уязвимостей, рекомендации по усилению.</p>
-    </div>
-    <div class="card">
-      <h3>Пентест</h3>
-      <p>Моделирование атак хакеров. Тестирование веб, API, внутренней сети.</p>
-    </div>
-    <div class="card">
-      <h3>DDoS защита</h3>
-      <p>Обнаружение, фильтрация, антибот и защита от массовых атак.</p>
-    </div>
-    <div class="card">
-      <h3>Инцидент-респонс</h3>
-      <p>Быстрое реагирование, расследование, устранение последствий.</p>
-    </div>
-  </section>
-
-  <section id="account" class="steps">
-    <div class="card">
-      <h3>Личный кабинет</h3>
-      <p>Получите доступ к защищённой клиентской панели для управления услугами и заявками.</p>
-      <a href="#" class="button">Войти / Регистрация</a>
-    </div>
-  </section>
-
-  <section class="clients">
-    <div class="card">
-      <h3>100+ клиентов</h3>
-      <p>Государственные и частные компании доверяют нам свою безопасность.</p>
-    </div>
-    <div class="card">
-      <h3>24/7 мониторинг</h3>
-      <p>Мы всегда на страже: отслеживание угроз и реагирование круглосуточно.</p>
-    </div>
-    <div class="card">
-      <h3>Эксперты в штате</h3>
-      <p>Сертифицированные специалисты с опытом работы в SOC, CERT, Red Team.</p>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
-    <div class="card">
-      <h3>Связаться с нами</h3>
-      <p>Email: office@ngcd.tech</p>
-      <p>Телефон: +7 (702) 798-99-57</p>
-      <p>Астана, ул. Әлихан Бөкейхан 25А</p>
-    </div>
-    <div class="card">
-      <h3>Реквизиты</h3>
-      <p>ТОО «NexGen CyberDefence»</p>
-      <p>БИН: 123456789012</p>
-      <p>Счёт: KZ0000000000000000</p>
-    </div>
-    <div class="card">
-      <h3>Работа с нами</h3>
-      <p>Ищем талантов в области ИБ: аналитиков, пентестеров, инженеров SOC.</p>
-    </div>
-  </section>
+  <main>
+    <section class="services">
+      <div class="card" data-aos="fade-up">
+        <h3>Пентесты</h3>
+        <p>Проверим ваш сайт и сеть на уязвимости и поможем их устранить.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <h3>DDoS-защита</h3>
+        <p>Надежная защита от распределенных атак и перегрузок сервера.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Инцидент-респонс</h3>
+        <p>Реагирование на киберинциденты, сбор логов и устранение угроз.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="300">
+        <h3>Обучение</h3>
+        <p>Обучим ваших сотрудников базовым принципам ИБ и фишинг-защите.</p>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    &copy; 2025 NexGen CyberDefence. Все права защищены.
+    <p>&copy; NexGen. Все права защищены.</p>
   </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    lucide.createIcons();
+    AOS.init();
+
+   // 3D параллакс эффект
+   // const hero = document.getElementById('hero');
+   // hero.addEventListener('mousemove', (e) => {
+    //  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    //  const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    //  hero.querySelector('h2').style.transform = rotateY(${x}deg) rotateX(${-y}deg);
+    //  hero.querySelector('p').style.transform = translateX(${x}px) translateY(${y}px);
+  //  });
+
+//    hero.addEventListener('mouseleave', () => {
+ //     hero.querySelector('h2').style.transform = 'none';
+  //    hero.querySelector('p').style.transform = 'none';
+ //   });
+
+    // canvas stars
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = hero.offsetHeight;
+    }
+
+    function createStars(count) {
+      stars = [];
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.5,
+          speed: Math.random() * 0.5 + 0.2
+        });
+      }
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#58a6ff';
+      for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+        ctx.fill();
+        star.y += star.speed;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      }
+      requestAnimationFrame(animateStars);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createStars(120);
+    });
+
+    resizeCanvas();
+    createStars(120);
+    animateStars();
+
+    // Переключатель темы
+    const themeToggle = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'light') document.body.classList.add('light');
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    });
+  </script>
+
+
+  <script>
+    const text = "Будущее кибербезопасности уже здесь";
+    const speed = 75;
+    let i = 0;
+
+    function typeWriter() {
+      const typedText = document.getElementById("typed-text");
+      if (i < text.length) {
+        typedText.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", typeWriter);
+  </script>
+
+
 
 </body>
 </html>
