@@ -355,50 +355,46 @@
       return getComputedStyle(document.documentElement).getPropertyValue('--color-stars').trim();
     }
 
-  function animateStars() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const isLight = document.body.classList.contains('light');
-    const color = getStarColor();
-    ctx.fillStyle = color;
-    ctx.strokeStyle = color;
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const isLight = document.body.classList.contains('light');
+      const color = getStarColor();
+      ctx.fillStyle = color;
+      ctx.strokeStyle = color;
 
-    for (let star of stars) {
-      if (isLight) {
-        // ☀️ Рисуем "солнышко"
-        const r = star.radius * 3;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, r, 0, 2 * Math.PI);
-        ctx.fill();
-
-        // лучи солнца
-        for (let i = 0; i < 8; i++) {
-          const angle = (Math.PI / 4) * i;
-          const x1 = star.x + Math.cos(angle) * r;
-          const y1 = star.y + Math.sin(angle) * r;
-          const x2 = star.x + Math.cos(angle) * (r + 5);
-          const y2 = star.y + Math.sin(angle) * (r + 5);
+      for (let star of stars) {
+        if (isLight) {
+          const r = star.radius * 3;
           ctx.beginPath();
-          ctx.moveTo(x1, y1);
-          ctx.lineTo(x2, y2);
-          ctx.stroke();
+          ctx.arc(star.x, star.y, r, 0, 2 * Math.PI);
+          ctx.fill();
+
+          for (let i = 0; i < 8; i++) {
+            const angle = (Math.PI / 4) * i;
+            const x1 = star.x + Math.cos(angle) * r;
+            const y1 = star.y + Math.sin(angle) * r;
+            const x2 = star.x + Math.cos(angle) * (r + 5);
+            const y2 = star.y + Math.sin(angle) * (r + 5);
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+          }
+        } else {
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+          ctx.fill();
         }
-      } else {
-        // ✨ Обычные звезды
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
-        ctx.fill();
+
+        star.y += star.speed;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
       }
 
-      // Движение вниз
-      star.y += star.speed;
-      if (star.y > canvas.height) {
-        star.y = 0;
-        star.x = Math.random() * canvas.width;
-      }
+      requestAnimationFrame(animateStars);
     }
-
-    requestAnimationFrame(animateStars);
-  }
 
     window.addEventListener('resize', () => {
       resizeCanvas();
