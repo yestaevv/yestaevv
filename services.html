@@ -3,53 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Услуги — NexGen</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <title>Услуги NexGen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-end: #000;
+      --card: #111;
+      --accent: #58a6ff;
+      --text: #e0e0e0;
+    }
+
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(180deg, #0d1117, #161b22);
-      color: #e6edf3;
       margin: 0;
-      padding: 40px;
-      line-height: 1.7;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(ellipse at center, var(--bg) 0%, var(--bg-end) 100%);
+      color: var(--text);
+      line-height: 1.8;
+      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      background: #21262d;
-      padding: 40px;
-      border-radius: 12px;
-      border: 1px solid #30363d;
-      box-shadow: 0 0 20px rgba(88,166,255,0.1);
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: var(--card);
+      border-bottom: 2px solid var(--accent);
     }
 
-    h1 {
-      font-size: 2.5em;
-      color: #58a6ff;
-      margin-bottom: 20px;
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      text-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent);
+    }
+
+    .hero {
+      position: relative;
       text-align: center;
+      padding: 100px 20px;
+      overflow: hidden;
     }
 
-    h2 {
-      color: #58a6ff;
-      margin-top: 40px;
+    .hero canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
     }
 
-    p {
-      margin-bottom: 15px;
-      font-size: 1.1em;
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      font-size: 3em;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 1;
+      font-size: 1.2em;
       color: #c9d1d9;
     }
 
-    ul {
-      margin-bottom: 20px;
-      padding-left: 20px;
+    .content {
+      max-width: 960px;
+      margin: 60px auto;
+      padding: 40px;
+      background-color: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(88,166,255,0.1);
+      border: 1px solid var(--accent);
     }
 
-    ul li {
+    .service {
+      margin-bottom: 40px;
+    }
+
+    .service h2 {
+      color: var(--accent);
       margin-bottom: 10px;
+    }
+
+    .service p {
+      color: #ccc;
+      font-size: 1.05em;
+      margin: 0;
     }
 
     .back {
@@ -57,68 +113,140 @@
       margin-top: 40px;
     }
 
-    a {
-      color: #58a6ff;
+    .back a {
+      color: var(--accent);
       text-decoration: none;
+      font-weight: bold;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .back a:hover {
+      text-shadow: 0 0 8px var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2em;
+      }
+
+      .content {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Наши услуги</h1>
 
-    <h2>Security Operations Center (SOC)</h2>
-    <p>
-      Централизованный центр мониторинга и реагирования на киберугрозы 24/7. Мы выявляем инциденты, реагируем мгновенно и предотвращаем атаки до того, как они нанесут ущерб.
-    </p>
-    <ul>
-      <li>Постоянный мониторинг ИБ</li>
-      <li>Анализ событий и корреляция угроз</li>
-      <li>Быстрое реагирование и уведомление</li>
-    </ul>
+  <header>
+    <div class="logo">NexGen</div>
+    <nav class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="about.html">О нас</a>
+      <a href="contact.html">Контакты</a>
+    </nav>
+  </header>
 
-    <h2>Пентест (тестирование на проникновение)</h2>
-    <p>
-      Мы симулируем атаки хакеров, чтобы выявить уязвимости до злоумышленников. Проверка проходит по OWASP, MITRE и NIST.
-    </p>
-    <ul>
-      <li>Веб-приложения, API, сети</li>
-      <li>Внутренний и внешний пентест</li>
-      <li>Полный отчёт + рекомендации</li>
-    </ul>
+  <section class="hero">
+    <canvas id="stars"></canvas>
+    <h1 data-aos="fade-up">Наши Услуги</h1>
+    <p data-aos="fade-up" data-aos-delay="150">Комплексная кибербезопасность от NexGen.</p>
+  </section>
 
-    <h2>DDoS-защита</h2>
-    <p>
-      Фильтрация вредоносного трафика, защита от перегрузки, антиботы и блокировка источников атак.
-    </p>
-    <ul>
-      <li>Анализ трафика в реальном времени</li>
-      <li>Автоматическое масштабирование и фильтрация</li>
-      <li>Защита SLA-критичных сервисов</li>
-    </ul>
+  <div class="content" data-aos="fade-up">
+    
+    <div class="service">
+      <h2>Пентест</h2>
+      <p>Проводим глубинные тестирования ваших систем безопасности с имитацией действий настоящих злоумышленников. Проверим веб-приложения, сети, выявим все уязвимости до хакеров. Предоставим подробный отчёт и план устранения.</p>
+    </div>
 
-    <h2>Аудит информационной безопасности</h2>
-    <p>
-      Оценка текущего уровня защиты, выявление рисков, подготовка отчёта с рекомендациями по устранению уязвимостей.
-    </p>
-    <ul>
-      <li>Аудит инфраструктуры</li>
-      <li>Оценка соответствия требованиям (ISO, НБ РК и др.)</li>
-      <li>Подготовка политики и процедур ИБ</li>
-    </ul>
+    <div class="service">
+      <h2>DDoS-защита</h2>
+      <p>Настроим надёжную защиту от распределённых атак и перегрузок. Используем интеллектуальную фильтрацию трафика, геоблокинг, антибот-решения и CDN. Сохраняем доступность ваших сервисов в любой ситуации.</p>
+    </div>
 
-    <h2>Обучение и осведомлённость</h2>
-    <p>
-      Повышение уровня знаний персонала через интерактивные тренинги, фишинговые симуляции и тестирования.
-    </p>
+    <div class="service">
+      <h2>Инцидент-респонс</h2>
+      <p>Мгновенно реагируем на киберинциденты. Сбор логов, анализ угроз, изоляция атакованных узлов, восстановление работоспособности и предоставление рекомендаций. Интеграция с SIEM, SOAR и Forensics-подходы.</p>
+    </div>
+
+    <div class="service">
+      <h2>Обучение персонала</h2>
+      <p>Обучим ваших сотрудников основам информационной безопасности, защите от фишинга, работе с подозрительными письмами и безопасному поведению в сети. Адаптированные тренинги под ваш уровень и формат — онлайн или офлайн.</p>
+    </div>
+
+    <div class="service">
+      <h2>Консалтинг по ИБ</h2>
+      <p>Проконсультируем по всем вопросам ИБ. Подготовим компанию к сертификации по ISO 27001, NIST, PCI DSS и другим стандартам. Оптимизируем процессы, минимизируем риски и выстроим архитектуру безопасности под ваш бизнес.</p>
+    </div>
+
+    <div class="service">
+      <h2>Аудит ИБ</h2>
+      <p>Проведём комплексную проверку вашей ИТ-инфраструктуры. Найдём слабые места, оценим уровень защищённости, протестируем системы и политики. Сформируем отчёт с рекомендациями по усилению защиты и минимизации угроз.</p>
+    </div>
+
+    <div class="service">
+      <h2>SOC-поддержка 24/7</h2>
+      <p>Возьмём под контроль вашу безопасность круглосуточно. Мониторинг событий, обнаружение атак, корреляция логов, генерация алертов и реагирование на инциденты в режиме реального времени. SLA — от 99.99%.</p>
+    </div>
+
+    <div class="service">
+      <h2>Phishing-тестирование</h2>
+      <p>Запускаем контролируемые фишинговые кампании для проверки бдительности сотрудников. Анализируем кликабельность, обучаем тех, кто попался, и формируем отчёт о реальных рисках человеческого фактора.</p>
+    </div>
 
     <div class="back">
       <a href="index.html">← Вернуться на главную</a>
     </div>
   </div>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init();</script>
+
+  <script>
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = document.querySelector('.hero').offsetHeight;
+    }
+
+    function createStars(count) {
+      stars = [];
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.5,
+          speed: Math.random() * 0.5 + 0.2
+        });
+      }
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#58a6ff';
+      for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+        ctx.fill();
+        star.y += star.speed;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      }
+      requestAnimationFrame(animateStars);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createStars(100);
+    });
+
+    resizeCanvas();
+    createStars(100);
+    animateStars();
+  </script>
 </body>
 </html>
