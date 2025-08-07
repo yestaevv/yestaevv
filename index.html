@@ -3,23 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NexGen</title>
+  <title>NexGen CyberDefence</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
     :root {
       --color-bg: #0a0a0a;
+      --color-bg-gradient-end: #000000;
       --color-card: #111;
       --color-accent: #58a6ff;
       --color-text: #e0e0e0;
+      --color-stars: #58a6ff;
     }
 
     body.light {
       --color-bg: #f7f7f7;
+      --color-bg-gradient-end: #cccccc;
       --color-card: #fff;
       --color-accent: #007bff;
       --color-text: #222;
+      --color-stars: #007bff;
     }
 
     * {
@@ -33,7 +37,11 @@
       background-color: var(--color-bg);
       color: var(--color-text);
       line-height: 1.6;
-      transition: background-color 0.3s, color 0.3s;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    header, footer, .card, .hero {
+      transition: background-color 0.5s, color 0.5s, border-color 0.5s;
     }
 
     header {
@@ -41,7 +49,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 40px;
-      background-color: #111;
+      background-color: var(--color-card);
       border-bottom: 2px solid var(--color-accent);
     }
 
@@ -75,7 +83,7 @@
       overflow: hidden;
       text-align: center;
       padding: 100px 20px;
-      background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+      background: radial-gradient(ellipse at center, var(--color-bg) 0%, var(--color-bg-gradient-end) 100%);
       transform-style: preserve-3d;
       perspective: 1000px;
     }
@@ -164,7 +172,7 @@
     footer {
       text-align: center;
       padding: 30px 20px;
-      background-color: #111;
+      background-color: var(--color-card);
       border-top: 2px solid var(--color-accent);
       margin-top: 40px;
     }
@@ -173,36 +181,96 @@
       color: #999;
     }
 
-#typewriter {
-  display: inline-block;
-  font-size: 48px;
-  color: var(--color-accent);
-  white-space: nowrap;
-  overflow: hidden;
+    #typewriter {
+      display: inline-block;
+      font-size: 48px;
+      color: var(--color-accent);
+      white-space: normal;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    #cursor {
+      display: inline-block;
+      animation: blink 0.8s infinite;
+      color: var(--color-accent);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .nav-links a {
+    margin: 10px 0;
+  }
+
+  .hero h2 {
+    font-size: 32px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .services {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  #typewriter {
+    font-size: 28px;
+  }
+
+  .hero h2 {
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
 }
 
-#cursor {
-  display: inline-block;
-  animation: blink 0.8s infinite;
-  color: var(--color-accent);
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
 
 
 
   </style>
 </head>
 <body>
+  <script>
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'light') document.body.classList.add('light');
+  </script>
+
   <header>
     <div class="logo">NexGen</div>
     <nav class="nav-links">
-      <a href="#">Главная</a>
-      <a href="#">Услуги</a>
-      <a href="#">Контакты</a>
+      <a href="">Главная</a>
+      <a href="services.html">Услуги</a>
+      <a href="contact.html">Контакты</a>
       <span class="theme-toggle" id="themeToggle" title="Сменить тему">
         <i data-lucide="moon-star"></i>
       </span>
@@ -213,7 +281,7 @@
     <canvas id="stars"></canvas>
     <h2 id="typewriter"><span id="typed-text"></span><span id="cursor">|</span></h2>
     <p>Пентесты, DDoS-защита, реагирование на инциденты и защита данных.</p>
-    <a href="#" class="button"><i data-lucide="shield-check"></i>Узнать больше</a>
+    <a href="about.html" class="button"><i data-lucide="shield-check"></i>Подробнее о NexGen</a>
   </section>
 
   <main>
@@ -234,6 +302,22 @@
         <h3>Обучение</h3>
         <p>Обучим ваших сотрудников базовым принципам ИБ и фишинг-защите.</p>
       </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="400">
+        <h3>Консалтинг ИБ</h3>
+        <p>Поможем внедрить стандарты ISO 27001 и другие — быстро, эффективно, с гарантией результата.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="500">
+        <h3>Аудит ИБ</h3>
+        <p>Глубокая проверка вашей ИТ-инфраструктуры с выявлением уязвимостей и рекомендациями по усилению защиты.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="600">
+        <h3>SOC-поддержка 24/7</h3>
+        <p>Следим за вашей безопасностью круглосуточно, реагируем мгновенно, предотвращаем потери.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="700">
+        <h3>Тестирование сотрудников (Phishing)</h3>
+        <p>Выявим уязвимые места в поведении сотрудников и обучим их защите от социальных атак.</p>
+      </div>
     </section>
   </main>
 
@@ -246,28 +330,13 @@
     lucide.createIcons();
     AOS.init();
 
-   // 3D параллакс эффект
-   // const hero = document.getElementById('hero');
-   // hero.addEventListener('mousemove', (e) => {
-    //  const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    //  const y = (e.clientY / window.innerHeight - 0.5) * 20;
-    //  hero.querySelector('h2').style.transform = rotateY(${x}deg) rotateX(${-y}deg);
-    //  hero.querySelector('p').style.transform = translateX(${x}px) translateY(${y}px);
-  //  });
-
-//    hero.addEventListener('mouseleave', () => {
- //     hero.querySelector('h2').style.transform = 'none';
-  //    hero.querySelector('p').style.transform = 'none';
- //   });
-
-    // canvas stars
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
     let stars = [];
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
-      canvas.height = hero.offsetHeight;
+      canvas.height = document.getElementById('hero').offsetHeight;
     }
 
     function createStars(count) {
@@ -282,21 +351,54 @@
       }
     }
 
-    function animateStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#58a6ff';
-      for (let star of stars) {
+    function getStarColor() {
+      return getComputedStyle(document.documentElement).getPropertyValue('--color-stars').trim();
+    }
+
+  function animateStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const isLight = document.body.classList.contains('light');
+    const color = getStarColor();
+    ctx.fillStyle = color;
+    ctx.strokeStyle = color;
+
+    for (let star of stars) {
+      if (isLight) {
+        // ☀️ Рисуем "солнышко"
+        const r = star.radius * 3;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, r, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // лучи солнца
+        for (let i = 0; i < 8; i++) {
+          const angle = (Math.PI / 4) * i;
+          const x1 = star.x + Math.cos(angle) * r;
+          const y1 = star.y + Math.sin(angle) * r;
+          const x2 = star.x + Math.cos(angle) * (r + 5);
+          const y2 = star.y + Math.sin(angle) * (r + 5);
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
+        }
+      } else {
+        // ✨ Обычные звезды
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
         ctx.fill();
-        star.y += star.speed;
-        if (star.y > canvas.height) {
-          star.y = 0;
-          star.x = Math.random() * canvas.width;
-        }
       }
-      requestAnimationFrame(animateStars);
+
+      // Движение вниз
+      star.y += star.speed;
+      if (star.y > canvas.height) {
+        star.y = 0;
+        star.x = Math.random() * canvas.width;
+      }
     }
+
+    requestAnimationFrame(animateStars);
+  }
 
     window.addEventListener('resize', () => {
       resizeCanvas();
@@ -307,17 +409,12 @@
     createStars(120);
     animateStars();
 
-    // Переключатель темы
     const themeToggle = document.getElementById('themeToggle');
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'light') document.body.classList.add('light');
-
     themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('light');
       localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
     });
   </script>
-
 
   <script>
     const text = "Будущее кибербезопасности уже здесь";
@@ -335,8 +432,5 @@
 
     document.addEventListener("DOMContentLoaded", typeWriter);
   </script>
-
-
-
 </body>
 </html>
