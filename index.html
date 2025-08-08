@@ -256,6 +256,33 @@
 
 
 
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.auth-buttons a {
+  background: transparent;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.auth-buttons a:hover {
+  background: var(--color-accent);
+  color: #000;
+  box-shadow: 0 0 10px var(--color-accent);
+  transform: scale(1.05);
+}
+
+
+
 
   </style>
 </head>
@@ -271,6 +298,8 @@
       <a href="">Главная</a>
       <a href="services.html">Услуги</a>
       <a href="contact.html">Контакты</a>
+      <a href="/register">Регистрация</a>
+      <a href="/login">Войти</a>
       <span class="theme-toggle" id="themeToggle" title="Сменить тему">
         <i data-lucide="moon-star"></i>
       </span>
